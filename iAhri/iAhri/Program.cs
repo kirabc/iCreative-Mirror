@@ -20,7 +20,7 @@ namespace iAhri
         private static readonly Dictionary<int, DamageInfo> PredictedDamage = new Dictionary<int, DamageInfo>();
         private static Menu menu;
         private static readonly Dictionary<string, Menu> SubMenu = new Dictionary<string, Menu>();
-        private static Spell.Skillshot Q, W, E, R;
+        private static Spell.Skillshot Q, Q2, W, E, R;
         private static Spell.Targeted Ignite;
 
         private static readonly Dictionary<string, object> _Q = new Dictionary<string, object>
@@ -77,6 +77,10 @@ namespace iAhri
             }
             Chat.Print(AddonName + " made by " + Author + " loaded, have fun!.");
             Q = new Spell.Skillshot(SpellSlot.Q, 880, SkillShotType.Linear, 250, 1500, 100)
+            {
+                AllowedCollisionCount = int.MaxValue
+            };
+            Q2 = new Spell.Skillshot(SpellSlot.Q, 600, SkillShotType.Linear, 250, 1500, 100)
             {
                 AllowedCollisionCount = int.MaxValue
             };
@@ -293,7 +297,7 @@ namespace iAhri
                 }
                 if (SubMenu["Harass"]["Q"].Cast<CheckBox>().CurrentValue)
                 {
-                    CastQ(target);
+                    CastQ2(target);
                 }
                 if (SubMenu["Harass"]["W"].Cast<CheckBox>().CurrentValue)
                 {
